@@ -32,3 +32,5 @@
 *.out
 *.appexit(-1);
 
+# vscode configuration file
+.vscode/
