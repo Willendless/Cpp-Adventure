@@ -1,36 +1,8 @@
-# Prerequisites
-*.d
-		
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-*.swp
-		
-# Precompiled Headers
-*.gch
-*.pch
-		
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-		
-# Fortran module files
-*.mod
-*.smod
-		
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-		
-# Executables
-*.exe
-*.out
-*.appexit(-1);
+*
 
-# vscode configuration file
-.vscode/
+!*.c
+!*.cc
+!*.gcc
+!*.h
+!*.md
+!Makefile

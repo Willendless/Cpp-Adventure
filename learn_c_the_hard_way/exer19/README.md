@@ -14,3 +14,19 @@
 ## Debug macros
 
 作者使用c宏实现了一个基本的debugging和error-handling系统。实现方式基于c语言惯例：当error发生，使用`goto`跳转到标签`error:`，并由标签处的代码释放资源。
+
+## 功能
+
+1. debug: 输出debug信息(文件名，行，格式化字符串)
+2. log：输出log信息(同debug，但分成err，warn，info三类)
+3. check
+    + assert true：`check()`，`check_debug()`
+    + unreached code: `sentinel()`
+    + null ptr: `check_mem()`
+
+## Extra credit
+
+1. 通过`#define NDEBUG`关闭debug相关宏使用
+2. Makefile中通过在`CFLAGS`中添加`-DNDEBUG`关闭debug相关宏使用
+    + `CFLAGS="-DNDEBUG" make ex19`
+3. 当前函数名__func__，当前文件名__FILE__，当前行__LINE__
