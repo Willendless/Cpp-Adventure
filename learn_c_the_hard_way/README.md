@@ -1,0 +1,7 @@
+# learn c the hard way
+
+该仓库记录*learn c the hard way*的学习笔记和代码。
+
+## 笔记
+
++ [ ] [19. Zed's Awesome Debug Macros](./notes/19.md)
