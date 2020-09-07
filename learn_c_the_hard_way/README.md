@@ -4,4 +4,4 @@
 
 ## 笔记
 
-+ [ ] [19. Zed's Awesome Debug Macros](./exer19/)
++ [x] [19. Zed's Awesome Debug Macros](./exer19/)
