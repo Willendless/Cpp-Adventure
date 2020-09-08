@@ -4,4 +4,7 @@
 
 ## 笔记
 
-+ [x] [19. Zed's Awesome Debug Macros](./exer19/)
+- [x] [19. Zed's Awesome Debug Macros](./exer19/)
+- [x] [22. C scope](./exer20/)
+- [x] [24: C file IO](./exer24/)
+- [ ] [28-30: C project skeleton](./exer28-30/)
