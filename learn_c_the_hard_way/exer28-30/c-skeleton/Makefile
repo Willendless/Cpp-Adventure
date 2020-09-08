@@ -8,7 +8,7 @@ OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 TEST_SRC=$(wildcard tests/*_tests.c)
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
-TARGET=build/libYOUR_LIBRARY.a
+TARGET=build/libex29.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
 all: $(TARGET) $(SO_TARGET) tests
@@ -35,7 +35,8 @@ build:
 # the unit tests
 .PHONY: tests
 tests: CFLAGS += $(TARGET)
-tests: $(TESTS)
+tests:
+	$(CC) $(CFLAGS) $(TEST_SRC) -ldl -o $(TESTS)
 	sh ./tests/runtests.sh
 
 # the cleaner
