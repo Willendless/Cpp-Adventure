@@ -1,11 +1,12 @@
 CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
-LIBS=-ldl $(OPTLIBS)
+LIBS=$(OPTLIBS) -ldl
 PREFIX?=/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
 TEST_SRC=$(wildcard tests/*_tests.c)
+TEST_OBJ=$(patsubst %.c,%.o,$(TEST_SRC))
 TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
 # specify build directory
@@ -36,10 +37,12 @@ build:
 
 # the unit tests
 .PHONY: tests
-tests: CFLAGS += $(TARGET)
-tests:
-	$(CC) $(CFLAGS) $(TEST_SRC) -ldl -o $(TESTS)
+# tests: CFLAGS += $(TARGET)
+tests: $(TESTS)
 	sh ./tests/runtests.sh
+
+$(TESTS): $(TEST_OBJ)
+	$(CC) $(CFLAGS) $@.o -o $@ $(LIBS)
 
 # the cleaner
 clean:
