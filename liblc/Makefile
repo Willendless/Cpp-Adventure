@@ -37,13 +37,12 @@ build:
 
 # the unit tests
 .PHONY: tests
-tests: CFLAGS += $(TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
 
 # uncomment when dynamic library need to be linked to tests
-# $(TESTS): $(TEST_OBJ)
-# 	$(CC) $(CFLAGS) $@.o -o $@ $(LIBS)
+$(TESTS): $(TEST_SRC)
+	$(CC) $(CFLAGS) $@.c $(TARGET) -o $@ $(LIBS)
 
 # the cleaner
 clean:
