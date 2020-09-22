@@ -1,6 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
 
 echo "Running unit tests:"
+
+rm tests/tests.log
+
+all_tests=0
+ok=0
 
 for i in tests/*_tests
 do
@@ -8,14 +13,15 @@ do
     then
         if $VALGRIND ./$i 2>> tests/tests.log
         then
-            echo $i PASS
+            let ok++;
+            echo "[PASS]"
         else
-            echo "ERROR in test $i: here's tests/tests.log"
-            echo "------"
-            tail tests/tests.log
-            exit 1
+            echo "[FAILED]"
+            # tail tests/tests.log
         fi
     fi
+    let all_tests++;
 done
 
-echo "test passed"
+echo "----"
+echo "${ok}/${all_tests} passed"

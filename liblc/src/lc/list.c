@@ -1,11 +1,14 @@
 #include <lc/debug.h>
 #include <lc/list.h>
+#include <assert.h>
 
 List *List_create() {
     return calloc(1, sizeof(List));
 }
 
 void List_destroy(List *list) {
+    assert(list != NULL && "input list cannot be null");
+
     LIST_FOREACH(list, first, next, cur) {
         if (cur->prev) {
             free(cur->prev);
@@ -16,17 +19,27 @@ void List_destroy(List *list) {
 }
 
 void List_clear(List *list) {
+    assert(list != NULL && "input list cannot be null");
+
     LIST_FOREACH(list, first, next, cur) {
         free(cur->value);
     }
 }
 
 void List_clear_destroy(List *list) {
-    List_clear(list);
-    List_destroy(list);
+    assert(list != NULL && "input list cannot be null");
+
+    LIST_FOREACH(list, first, next, cur) {
+        free(cur->value);
+        if (cur -> prev) {
+            free(cur->prev);
+        }
+    }
 }
 
 void List_push(List *list, void *value) {
+    assert(list != NULL && "input list cannot be null");
+
     ListNode *n = calloc(1, sizeof(ListNode));
     check_mem(n);
 
@@ -47,11 +60,15 @@ error:
 }
 
 void *List_pop(List *list) {
+    assert(list != NULL && "input list cannot be null");
+    
     ListNode *n = list->last;
     return n == NULL? NULL : List_remove(list, n);
 }
 
 void List_unshift(List *list, void *value) {
+    assert(list != NULL && "input list cannot be null");
+
     ListNode *n = calloc(1, sizeof(ListNode));
     check_mem(n);
 
@@ -72,11 +89,15 @@ error:
 }
 
 void *List_shift(List *list) {
+    assert(list != NULL && "input list cannot be null");
+
     ListNode *n = list->first;
     return n == NULL? NULL : List_remove(list, n);
 }
 
 void *List_remove(List *list, ListNode *node) {
+    assert(list != NULL && "input list cannot be null");
+
     ListNode *result = NULL;
 
     check(list->first && list->last, "List is empty.");
@@ -103,4 +124,27 @@ void *List_remove(List *list, ListNode *node) {
 
 error:
     return result;
+}
+
+void List_insert(List *list, ListNode *next, void *value) {
+    assert(list != NULL && "Input list cannot be null.");
+    assert(next != NULL && "Next node cannot be null.");
+
+    ListNode *n = calloc(1, sizeof(ListNode));
+    n->value = value;
+    n->next = next;
+    n->prev = next->prev;
+
+    if (n->prev == NULL) {
+        check(List_begin(list) == next, "Bad list or bad next node.");
+        list->first = n;
+    } else
+        n->prev->next = n;
+    n->next->prev = n;
+
+    return;
+
+error:
+    free(n);
+    return;
 }
