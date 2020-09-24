@@ -68,7 +68,7 @@ static void list_inplace_merge(List *list, ListNode *a0, ListNode *a1b0, ListNod
 }
 
 /**
- * Interative merge sort that runs in O(nlogn) time and O(1) space
+ * Interative merge sort that runs in O(nlogn) time and O(1) space.
  */
 int List_merge_sort(List *list, List_compare cmp) {
     assert(list != NULL && "List cannot be null.");
@@ -79,7 +79,7 @@ int List_merge_sort(List *list, List_compare cmp) {
     do {
         runs_left_cnt = 0;
         for (a0 = List_begin(list); a0 != NULL; a0 = b1->next) {
-            runs_left_cnt++; // each iteration produces one run
+            runs_left_cnt++; // each iteration produces one run.
             a1b0 = find_end_of_run(a0, cmp);
             if (a1b0 == NULL) {
                 return 1;
